@@ -3,8 +3,6 @@ package dev.miguelcampos.themoviedbandroid.repository
 import android.widget.Toast
 
 import androidx.lifecycle.MutableLiveData
-
-import dev.miguelcampos.themoviedbandroid.common.Constantes
 import dev.miguelcampos.themoviedbandroid.common.MyApp
 import dev.miguelcampos.themoviedbandroid.retrofit.TheMovieDBClient
 import dev.miguelcampos.themoviedbandroid.retrofit.TheMovieDBService

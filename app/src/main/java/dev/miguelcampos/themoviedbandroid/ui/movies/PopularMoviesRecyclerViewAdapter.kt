@@ -4,15 +4,17 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import dev.miguelcampos.themoviedbandroid.R
 import dev.miguelcampos.themoviedbandroid.retrofit.response.Movie
 import kotlinx.android.synthetic.main.fragment_movies.view.*
 
-class PopularMoviesRecyclerViewAdapter(
-    private val mValues: List<Movie>
-) : RecyclerView.Adapter<PopularMoviesRecyclerViewAdapter.ViewHolder>() {
+class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecyclerViewAdapter.ViewHolder>() {
 
+    private var movies: List<Movie> = ArrayList()
     private val mOnClickListener: View.OnClickListener
 
     init {
@@ -28,9 +30,12 @@ class PopularMoviesRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        val item = movies[position]
+        holder.ivMoviePoster.load(item.poster_path){
+            crossfade(true)
+            placeholder(R.drawable.ic_cine)
+            transformations(CircleCropTransformation())
+        }
 
         with(holder.mView) {
             tag = item
@@ -38,14 +43,17 @@ class PopularMoviesRecyclerViewAdapter(
         }
     }
 
-    override fun getItemCount(): Int = mValues.size
+    fun setData(newMovies: List<Movie>) {
+        movies.toMutableList().clear()
+        movies.toMutableList().addAll(newMovies)
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int {
+        return movies.size
+    }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
-
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
-        }
+        val ivMoviePoster: ImageView = mView.image_view_movie_poster
     }
 }

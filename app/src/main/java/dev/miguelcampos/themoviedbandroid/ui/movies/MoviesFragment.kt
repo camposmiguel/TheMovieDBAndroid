@@ -16,7 +16,9 @@ import dev.miguelcampos.themoviedbandroid.retrofit.response.Movie
 
 class MoviesFragment : Fragment() {
     private lateinit var moviesViewModel: MoviesViewModel
-    private lateinit var popularMovies: List<Movie>
+    private lateinit var moviesAdapter: PopularMoviesRecyclerViewAdapter
+    private var popularMovies: List<Movie> = ArrayList()
+
 
     // TODO: Customize parameters
     private var columnCount = 1
@@ -27,25 +29,26 @@ class MoviesFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
-        moviesViewModel =
-            ViewModelProvider(this).get(MoviesViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        moviesViewModel.getPopularMovies()?.observe(viewLifecycleOwner, Observer {
-            popularMovies = it
-        })
-        return root
-
         // Set the adapter
+        moviesAdapter = PopularMoviesRecyclerViewAdapter()
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = PopularMoviesRecyclerViewAdapter(popularMovies)
+                adapter = moviesAdapter
             }
         }
+
+        moviesViewModel =
+            ViewModelProvider(this).get(MoviesViewModel::class.java)
+
+        moviesViewModel.getPopularMovies()?.observe(viewLifecycleOwner, Observer {
+            popularMovies = it
+            moviesAdapter.setData(popularMovies)
+        })
+
         return view
     }
 
