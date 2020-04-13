@@ -21,7 +21,7 @@ class MoviesFragment : Fragment() {
 
 
     // TODO: Customize parameters
-    private var columnCount = 1
+    private var columnCount = 2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

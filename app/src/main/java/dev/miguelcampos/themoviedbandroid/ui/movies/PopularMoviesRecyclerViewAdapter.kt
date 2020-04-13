@@ -9,6 +9,7 @@ import android.widget.TextView
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import dev.miguelcampos.themoviedbandroid.R
+import dev.miguelcampos.themoviedbandroid.common.Constantes
 import dev.miguelcampos.themoviedbandroid.retrofit.response.Movie
 import kotlinx.android.synthetic.main.fragment_movies.view.*
 
@@ -31,7 +32,8 @@ class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecycl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = movies[position]
-        holder.ivMoviePoster.load(item.poster_path){
+        holder.tvMovieTitle.text = item.title
+        holder.ivMoviePoster.load(Constantes.IMAGE_BASE_URL+item.poster_path){
             crossfade(true)
             placeholder(R.drawable.ic_cine)
             transformations(CircleCropTransformation())
@@ -44,9 +46,8 @@ class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecycl
     }
 
     fun setData(newMovies: List<Movie>) {
-        movies.toMutableList().clear()
-        movies.toMutableList().addAll(newMovies)
-        notifyDataSetChanged()
+        movies = newMovies
+        this.notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
@@ -55,5 +56,6 @@ class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecycl
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val ivMoviePoster: ImageView = mView.image_view_movie_poster
+        val tvMovieTitle: TextView = mView.text_view_titulo_pelicula
     }
 }
