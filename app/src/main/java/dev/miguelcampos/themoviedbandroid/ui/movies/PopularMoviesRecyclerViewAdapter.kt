@@ -4,27 +4,46 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import dev.miguelcampos.themoviedbandroid.R
 import dev.miguelcampos.themoviedbandroid.common.Constantes
+import dev.miguelcampos.themoviedbandroid.common.MyApp
 import dev.miguelcampos.themoviedbandroid.retrofit.response.Movie
 import kotlinx.android.synthetic.main.fragment_movies.view.*
 
 
-class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecyclerViewAdapter.ViewHolder>() {
+class PopularMoviesRecyclerViewAdapter(
+    moviesViewModel: MoviesViewModel,
+    isTablet: Boolean,
+    viewLifecycleOwner: LifecycleOwner
+) : RecyclerView.Adapter<PopularMoviesRecyclerViewAdapter.ViewHolder>() {
 
     private var movies: List<Movie> = ArrayList()
     private val mOnClickListener: View.OnClickListener
+    private var selectedMovieId: Int = -1
+    var tablet: Boolean = false
 
     init {
+
+        tablet = isTablet
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as Movie
+            moviesViewModel.selectedMovie.setValue(item.id)
         }
+
+        moviesViewModel.selectedMovie?.observe(viewLifecycleOwner, Observer {
+            when { tablet -> {
+                selectedMovieId = it
+                notifyDataSetChanged()
+            }}
+        })
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +54,15 @@ class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecycl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = movies[position]
+
+        when {
+            tablet && selectedMovieId == item.id -> {
+                holder.mView.setBackgroundColor(ContextCompat.getColor(MyApp.instance, R.color.light_grey))
+            } else -> {
+                holder.mView.setBackgroundColor(ContextCompat.getColor(MyApp.instance, android.R.color.white))
+            }
+        }
+
         holder.tvMovieTitle.text = item.title
         holder.tvRating.text = item.vote_average.toString()
         holder.ivMoviePoster.load(Constantes.IMAGE_BASE_URL+item.poster_path){
@@ -55,7 +83,7 @@ class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecycl
 
     fun setData(newMovies: List<Movie>) {
         movies = newMovies
-        this.notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

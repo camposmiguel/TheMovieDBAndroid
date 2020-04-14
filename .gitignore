@@ -4,6 +4,9 @@
 *.ap_
 *.aab
 
+# Variables de Configuración
+app/src/main/java/dev/miguelcampos/themoviedbandroid/common/Constantes.kt
+
 # Files for the ART/Dalvik VM
 *.dex
 

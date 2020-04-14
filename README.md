@@ -1,6 +1,6 @@
 # POPCORNS MOVIES APP
 
-Aplicación de prueba en Android con Kotlin, aplicando el patrón MVVM.
+Aplicación de prueba en Android con Kotlin, aplicando el patrón MVVM. UI adaptable a Mobile y Tablet.
 
 ## Screenshots
 
@@ -9,6 +9,8 @@ Algunas capturas de pantalla de la app:
 <img src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_1.png" data-canonical-src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_1.png" width="250" />
 
 <img src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_2.png" data-canonical-src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_2.png" width="250" />
+
+<img src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_2.png" data-canonical-src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_3.png" width="500" />
 
 ## Built with
 
