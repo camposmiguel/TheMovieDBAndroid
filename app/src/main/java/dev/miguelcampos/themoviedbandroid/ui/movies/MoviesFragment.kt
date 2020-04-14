@@ -19,8 +19,6 @@ class MoviesFragment : Fragment() {
     private lateinit var moviesAdapter: PopularMoviesRecyclerViewAdapter
     private var popularMovies: List<Movie> = ArrayList()
 
-
-    // TODO: Customize parameters
     private var columnCount = 2
 
     override fun onCreateView(

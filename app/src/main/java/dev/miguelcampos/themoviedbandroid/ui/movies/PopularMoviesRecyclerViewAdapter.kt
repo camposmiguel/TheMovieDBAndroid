@@ -1,17 +1,20 @@
 package dev.miguelcampos.themoviedbandroid.ui.movies
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import dev.miguelcampos.themoviedbandroid.R
 import dev.miguelcampos.themoviedbandroid.common.Constantes
 import dev.miguelcampos.themoviedbandroid.retrofit.response.Movie
 import kotlinx.android.synthetic.main.fragment_movies.view.*
+
 
 class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecyclerViewAdapter.ViewHolder>() {
 
@@ -33,6 +36,7 @@ class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecycl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = movies[position]
         holder.tvMovieTitle.text = item.title
+        holder.tvRating.text = item.vote_average.toString()
         holder.ivMoviePoster.load(Constantes.IMAGE_BASE_URL+item.poster_path){
             crossfade(true)
             placeholder(R.drawable.ic_cine)
@@ -42,6 +46,10 @@ class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecycl
         with(holder.mView) {
             tag = item
             setOnClickListener(mOnClickListener)
+        }
+
+        if(position == movies.size-1 || position == movies.size-2) {
+            holder.mView.setPadding(0,0,0,180)
         }
     }
 
@@ -57,5 +65,6 @@ class PopularMoviesRecyclerViewAdapter: RecyclerView.Adapter<PopularMoviesRecycl
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val ivMoviePoster: ImageView = mView.image_view_movie_poster
         val tvMovieTitle: TextView = mView.text_view_titulo_pelicula
+        val tvRating: TextView = mView.text_view_rating
     }
 }
