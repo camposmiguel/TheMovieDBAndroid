@@ -1,4 +1,4 @@
-# POPCORN MOVIES APP
+# POPCORNS MOVIES APP
 
 Aplicación de prueba en Android con Kotlin, aplicando el patrón MVVM.
 
