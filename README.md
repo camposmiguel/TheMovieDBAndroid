@@ -18,6 +18,13 @@ Algunas capturas de pantalla de la app:
 * [Coil](https://github.com/coil-kt/coil) - Image loading for Android backed by Kotlin Coroutines.
 * [Android Jetpack](https://developer.android.com/jetpack) - Android Jetpack Architecture Components.
 
+## Deploy
+
+Hacer un git clone del repositorio y se puede abrir en Android Studio. IMPORTANTE, se debe configurar una API_KEY que debe obtenerse registrándose en la web de TheMovieDB. Dicha API_KEY hay que incluirla en el siguiente fichero:
+
+[./app/src/main/java/dev/miguelcampos/themoviedbandroid/common/Constantes.kt](./app/src/main/java/dev/miguelcampos/themoviedbandroid/common/Constantes.kt)
+
+
 ## Versioning
 
 v1.0
