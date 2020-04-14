@@ -6,9 +6,9 @@ Aplicación de prueba en Android con Kotlin, aplicando el patrón MVVM.
 
 Algunas capturas de pantalla de la app:
 
-<img src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_1.png" data-canonical-src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_1.png" width="200" height="400" />
+<img src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_1.png" data-canonical-src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_1.png" width="250" />
 
-![Screenshot movies](https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_2.png?raw=true =400x200)
+<img src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_2.png" data-canonical-src="https://github.com/camposmiguel/TheMovieDBAndroid/blob/master/RESOURCES/Screenshot_2.png" width="250" />
 
 ## Built with
 
